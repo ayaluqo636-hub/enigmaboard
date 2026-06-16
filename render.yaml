@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: enigmaboard
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: FOCALBOARD_PORT
+        value: 8000
+      # Render assigns the public URL after the first deploy (e.g.
+      # https://enigmaboard.onrender.com). Set FOCALBOARD_SERVERROOT to that
+      # value in the Render dashboard once you know it, then redeploy.
+      - key: FOCALBOARD_SERVERROOT
+        value: ""
+    disk:
+      name: enigmaboard-data
+      mountPath: /opt/focalboard/data
+      sizeGB: 1
